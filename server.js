@@ -18,16 +18,16 @@ var data= `${now}: ${req.method} ${req.url}`;
   console.log(data);
   fs.appendFile("server.log",data + '\n',(err)=>{
     if(err){
-      console.log("Unable to apend to server.log")
+      console.log("Unable to append to server.log")
     }
   })
   next();
 })
 
-app.use((req,res,next)=>{
-  res.render("maintenance.hbs");
-  // next();
-})
+// app.use((req,res,next)=>{
+//   res.render("maintenance.hbs");
+//   // next();
+// })
 
 hbs.registerHelper("stateCurrentYear",()=>{
   return new Date().getFullYear();
@@ -60,6 +60,12 @@ res.render("about.hbs",{
   pageTitle:"About Page",
   currentYear:new Date().getFullYear()
 });
+});
+
+app.get("/projects",(req,res)=>{
+  res.render("projects.hbs",{ 
+    pageTitle:"Projects"
+  });
 });
 
 app.get("/error",(req,res)=>{
